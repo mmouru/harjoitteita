@@ -6,29 +6,32 @@ class Node:
         self.next_node = n
 
 class LinkedList (object):
-    def __init__ (self, r = None):
-        self.root = r
-        self.size = 0
+    def __init__ (self, head = None):
+        # Alusta lista
+        self.head = head
+        self.length = 0
     def delete_all (self):
-        while (self.root != None):
-            temp = self.root
-            self.root = self.root.next_node
+        while (self.head != None):
+            temp = self.head
+            self.head = self.head.next_node
             temp = None
     def add (self, name, address, number):
-        new_node = Node (name, address, number, self.root)
-        self.root = new_node
-        self.size += 1
+        # Lisää uusi linkki ja kytke se headiin.
+        new_node = Node (name, address, number, self.head)
+        self.head = new_node
+        self.length += 1
     def print(self):
         # tyhjä res merkkijono
         res = ""
-        ptr = self.root 
-        #print(str(ptr.name))
+        # Pointteri listan päähän
+        ptr = self.head 
+        # Kun pointteri vielä osoittaa johonkin jäseneen, lisää jäsenen tiedot merkkijonoon
         while ptr:
             res += "[" + str(ptr.name) + " : " + str(ptr.address) + " : " + str(ptr.number) + "]"
             res += " -> "
             ptr = ptr.next_node
         res += "NULL"
-        if res == "NULL":
+        if self.length == 0:
             print("########################################")
             return "Lista on tyhja!"
         else:
